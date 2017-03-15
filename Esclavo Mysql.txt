@@ -1,0 +1,35 @@
+En el Servidor Maestro:
+
+#Opcional: Aplicar RESET al master y al slave (reinicio del contador de binlog) -> RESET MASTER; RESET SLAVE;
+
+#Bloquea las tablas contra escritura
+FLUSH TABLES WITH READ LOCK;
+
+#Muestra el estado de los binlogs, debería siempre mostrar el mismo valor (ya que las tablas no se están escribiendo)
+#Se debe anotar el valor mostrado por el comando
+SHOW MASTER STATUS;
+
+#Copiar los datos de las distintas BD a replicar
+rsync o scp de un server a otro
+
+#Fijarse que los permisos de los archivos en el server slave sean 660 y dueño.grupo = mysql
+
+#Luego de copiar los datos, se deben desbloquear las tablas en el master: UNLOCK TABLES;
+
+------------------------------------
+
+En el servidor slave:
+
+#Se debe aplicar el comando CHANGE MASTER TO:
+
+CHANGE MASTER TO
+MASTER_HOST='ip o hostname master',
+MASTER_USER='usuario replica master',
+MASTER_PASSWORD='password replica master',
+MASTER_LOG_FILE='nombre binlog del master',
+MASTER_LOG_POS=posicion_bin_log_master;
+
+#Los dos últimos datos se sacan del comando "SHOW MASTER STATUS" ejecutado anteriormente.
+
+#Luego se ejecuta el comando start slave, que debiese empezar con las sincronización
+#Esto puede demorar un tiempo dependiendo de la cantidad de datos nuevos que ya posea el master.
