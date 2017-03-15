@@ -1,0 +1,3 @@
+#Checkear todas las tablas de una BD:
+
+mysqlcheck -uUSER -pPASS DB
