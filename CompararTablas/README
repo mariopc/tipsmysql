@@ -1,0 +1,8 @@
+Modo de uso:
+
+./mk-table-checksum -aACCUM -u -p -d -t HOST1 HOST2
+
+-u = username
+-p = password
+-d = database
+-t = tablas (mas de 1 separar por comas)
