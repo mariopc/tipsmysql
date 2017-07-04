@@ -2,7 +2,7 @@ En el Servidor Maestro:
 
 #Opcional: Aplicar RESET al master y al slave (reinicio del contador de binlog) -> RESET MASTER; RESET SLAVE;
 
-#Bloquea las tablas contra escritura
+#Bloquea las tablas contra escritura (En el maestro)
 FLUSH TABLES WITH READ LOCK;
 
 #Muestra el estado de los binlogs, debería siempre mostrar el mismo valor (ya que las tablas no se están escribiendo)
